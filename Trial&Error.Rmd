@@ -1,0 +1,52 @@
+---
+title: "Trial & Error"
+author: "columbaspexit"
+date: "4/11/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Two things going on here.  
+
+  1. (trying to) Learn R Markdown 
+  2. Document attempts (failed or otherwise) at making TotePacking more user-friendly. 
+  
+## How does TotePacking work now?
+It's a recursive function that takes in two vectors, item & tote dimensions, and optionally: the current count of items that fit and which iteration the function is on (not actually needed, it's a holdover from writing the function and just kind of neat to know). It returns the number of copies that fit and the count of iterations called so far.
+
+Here's a sample of data that works with TotePacking:
+```{r}
+items <- read.csv("data/sample_items.csv")
+head(items)
+```
+
+The main appeal of a function is being able to calculate how many copies fit, not for just one item but for MANY items. But running the function for a lot of items is a little ridiculous right now...
+```{r eval = FALSE}
+for (i in 1:nrow(items)){
+  tempy <- TotePacking(as.vector(c(items$item_length[i], 
+                                   items$item_width[i], 
+                                   items$item_height[i])), 
+                       as.vector(c(items$tote_length[i], 
+                                   items$tote_width[i], 
+                                   items$tote_height[i])))
+  items$CvnQty[i] <- tempy[1]
+  items$Itrs[i] <- tempy[2]
+}
+```
+
+## How could TotePacking work better?
+The current goal to is get to something like this...
+```{r eval = FALSE}
+items_fits <- TotePacking(items$item_dims,items$tote_dims)
+```
+
+
+Or maybe even something like this, where items is a custom data type...
+```{r eval = FALSE}
+items_fit <- TotePacking(items)
+```
+
+TBC.!
