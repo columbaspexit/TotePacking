@@ -2,7 +2,7 @@
 title: "Trial & Error"
 author: "columbaspexit"
 date: "4/11/2020"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
