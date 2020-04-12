@@ -49,4 +49,7 @@ Or maybe even something like this, where items is a custom data type...
 items_fit <- TotePacking(items)
 ```
 
+TotePacking should also be a proper *package* and not just an RStudio project. >.> 
+
+
 TBC.!
